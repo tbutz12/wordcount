@@ -57,8 +57,9 @@ public static void main(String[] args) throws Exception {
         job.setOutputValueClass(IntWritable.class);
         FileInputFormat.addInputPath(job, new Path(args[0]));
         FileOutputFormat.setOutputPath(job, new Path(args[1]));
+        int x = job.waitForCompletion(true) ? 0 : 1;
         long end = System.currentTimeMillis();
-        System.out.println("Took : " + ((end - start) / 1000));
-        System.exit(job.waitForCompletion(true) ? 0 : 1);
+        System.out.println("Took : " + ((end - start) / 1000.0));
+        System.exit(x);
 }
 }
